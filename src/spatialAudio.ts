@@ -61,9 +61,16 @@ const createSpatialAudio: CreateSpatialAudio = () => {
                     await VoxeetSDK.conference.startAudio(participant);
                 }
 
-                if (!participant.streams || !participant.streams.find((stream) => stream.active && stream.type === 'Camera')) {
-                    // Start the video from the remote participant
-                    await VoxeetSDK.conference.startVideo(participant, {});
+                if (participant.streams && participant.streams.find((stream) => !stream.active && stream.type === 'Camera')) {
+                    try {
+                        // Start the video from the remote participant
+                        await VoxeetSDK.conference.startVideo(participant, {});
+                    } catch (error) {
+                        // Workaround until the audioOnly flag gets exposed to the conference object
+                        if (error.message.indexOf('Your conference is audio only') < 0) {
+                            throw error;
+                        }
+                    }
                 }
             } else {
                 // This participant is in a different zone
@@ -73,7 +80,7 @@ const createSpatialAudio: CreateSpatialAudio = () => {
                     await VoxeetSDK.conference.stopAudio(participant);
                 }
 
-                if (!localZone || localZone.videoRestriction || remoteZone.videoRestriction) {
+                if (!localZone || localZone.videoRestriction || !remoteZone || remoteZone.videoRestriction) {
                     if (participant.streams && participant.streams.find((stream) => stream.active && stream.type === 'Camera')) {
                         // Stop the video from the remote participant
                         await VoxeetSDK.conference.stopVideo(participant);

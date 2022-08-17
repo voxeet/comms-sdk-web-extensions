@@ -24,7 +24,7 @@ module.exports = {
     },
     devtool: 'eval-source-map',
     output: {
-        filename: 'voxeet-web-sdk-ext.js',
+        filename: 'voxeet-sdk-ext.js',
         path: path.resolve(__dirname, 'dist'),
         library: 'VoxeetSDKExt',
         libraryTarget: 'umd',

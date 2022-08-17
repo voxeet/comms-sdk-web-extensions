@@ -1,8 +1,8 @@
 {
     "name": "@dolbyio/comms-sdk-web-extensions",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Library of extensions for the Dolby.io Communication APIs SDK for web",
-    "main": "dist/voxeet-web-sdk-ext.js",
+    "main": "dist/voxeet-sdk-ext.js",
     "scripts": {
         "build": "webpack",
         "prettier": "prettier --write .",
