@@ -1,0 +1,18 @@
+Object.defineProperty(navigator, 'mediaDevices', {
+    writable: true,
+    value: jest.fn().mockImplementation(() => ({
+        ondevicechange: jest.fn(),
+    })),
+});
+
+URL.createObjectURL = () => {
+
+};
+
+navigator.attachMediaStream = () => {
+
+};
+
+navigator.mediaDevices.enumerateDevices = () => {
+    return new Promise(resolve => resolve([]));
+};

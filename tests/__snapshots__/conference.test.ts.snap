@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`conference test suite conference should match the snapshot 1`] = `
+Object {
+  "attachMediaStreamToHTMLVideoElement": [Function],
+  "switchToListener": [Function],
+  "switchToUser": [Function],
+}
+`;
