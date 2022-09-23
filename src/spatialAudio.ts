@@ -58,18 +58,13 @@ const createSpatialAudio: CreateSpatialAudio = () => {
 
                 if (!participant.audioReceivingFrom) {
                     // Start the audio from the remote participant
-                    await VoxeetSDK.conference.startAudio(participant);
+                    await VoxeetSDK.audio.remote.start(participant);
                 }
 
-                if (participant.streams && participant.streams.find((stream) => !stream.active && stream.type === 'Camera')) {
-                    try {
+                if (!VoxeetSDK.conference.current.isAudioOnly) {
+                    if (participant.streams && participant.streams.find((stream) => !stream.active && stream.type === 'Camera')) {
                         // Start the video from the remote participant
-                        await VoxeetSDK.conference.startVideo(participant, {});
-                    } catch (error) {
-                        // Workaround until the audioOnly flag gets exposed to the conference object
-                        if (error.message.indexOf('Your conference is audio only') < 0) {
-                            throw error;
-                        }
+                        await VoxeetSDK.video.remote.start(participant);
                     }
                 }
             } else {
@@ -77,13 +72,15 @@ const createSpatialAudio: CreateSpatialAudio = () => {
 
                 if (participant.audioReceivingFrom) {
                     // Stop the audio from the remote participant
-                    await VoxeetSDK.conference.stopAudio(participant);
+                    await VoxeetSDK.audio.remote.stop(participant);
                 }
 
-                if (!localZone || localZone.videoRestriction || !remoteZone || remoteZone.videoRestriction) {
-                    if (participant.streams && participant.streams.find((stream) => stream.active && stream.type === 'Camera')) {
-                        // Stop the video from the remote participant
-                        await VoxeetSDK.conference.stopVideo(participant);
+                if (!VoxeetSDK.conference.current.isAudioOnly) {
+                    if (!localZone || localZone.videoRestriction || !remoteZone || remoteZone.videoRestriction) {
+                        if (participant.streams && participant.streams.find((stream) => stream.active && stream.type === 'Camera')) {
+                            // Stop the video from the remote participant
+                            await VoxeetSDK.video.remote.stop(participant);
+                        }
                     }
                 }
             }
