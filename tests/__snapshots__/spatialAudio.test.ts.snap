@@ -1,18 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`spatial audio test suite first private zone should be updated 1`] = `
-Object {
-  "dimension": Object {
+{
+  "dimension": {
     "x": 2,
     "y": 2,
     "z": 2,
   },
-  "origin": Object {
+  "origin": {
     "x": 0,
     "y": 0,
     "z": 0,
   },
-  "scale": Object {
+  "scale": {
     "x": 1,
     "y": 1,
     "z": 1,
@@ -22,18 +22,18 @@ Object {
 `;
 
 exports[`spatial audio test suite first private zone should be updated 2`] = `
-Object {
-  "dimension": Object {
+{
+  "dimension": {
     "x": 2,
     "y": 2,
     "z": 2,
   },
-  "origin": Object {
+  "origin": {
     "x": 1,
     "y": 1,
     "z": 1,
   },
-  "scale": Object {
+  "scale": {
     "x": 1,
     "y": 1,
     "z": 1,
@@ -43,7 +43,7 @@ Object {
 `;
 
 exports[`spatial audio test suite instance should match the snapshot 1`] = `
-Object {
+{
   "createPrivateZone": [Function],
   "deletePrivateZone": [Function],
   "privateZones": Map {},
@@ -54,18 +54,18 @@ Object {
 `;
 
 exports[`spatial audio test suite private zones should be empty after deleting the last item 1`] = `
-Object {
-  "dimension": Object {
+{
+  "dimension": {
     "x": 2,
     "y": 2,
     "z": 2,
   },
-  "origin": Object {
+  "origin": {
     "x": 0,
     "y": 0,
     "z": 0,
   },
-  "scale": Object {
+  "scale": {
     "x": 1,
     "y": 1,
     "z": 1,
@@ -74,21 +74,21 @@ Object {
 }
 `;
 
-exports[`spatial audio test suite private zones should be empty after deleting the last item 2`] = `Array []`;
+exports[`spatial audio test suite private zones should be empty after deleting the last item 2`] = `[]`;
 
 exports[`spatial audio test suite returned zones should included the one just created 1`] = `
-Object {
-  "dimension": Object {
+{
+  "dimension": {
     "x": 2,
     "y": 2,
     "z": 2,
   },
-  "origin": Object {
+  "origin": {
     "x": 0,
     "y": 0,
     "z": 0,
   },
-  "scale": Object {
+  "scale": {
     "x": 1,
     "y": 1,
     "z": 1,
@@ -98,23 +98,23 @@ Object {
 `;
 
 exports[`spatial audio test suite setSpatialEnvironment 1`] = `
-Object {
-  "forward": Object {
+{
+  "forward": {
     "x": 0,
     "y": 0,
     "z": 0,
   },
-  "right": Object {
+  "right": {
     "x": 1,
     "y": 1,
     "z": 1,
   },
-  "scale": Object {
+  "scale": {
     "x": 10,
     "y": 10,
     "z": 10,
   },
-  "up": Object {
+  "up": {
     "x": 1,
     "y": 1,
     "z": 1,

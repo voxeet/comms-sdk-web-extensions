@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`breakoutRooms test suite breakoutRooms should match the snapshot 1`] = `
+{
+  "breakoutRooms": Map {},
+  "closeRoom": [Function],
+  "createRoom": [Function],
+  "moveTo": [Function],
+}
+`;
