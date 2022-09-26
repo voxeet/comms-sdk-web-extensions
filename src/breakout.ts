@@ -25,11 +25,11 @@ const createBreakout: CreateBreakout = (commands: CommandsType) => {
         VoxeetSDK.conference.on('joined', () => {
             notificationSubscriptions = [
                 {
-                    type: 'ParticipantJoined' as SubscriptionType,
+                    type: 'Participant.Joined' as SubscriptionType,
                     conferenceAlias: VoxeetSDK.conference.current.alias,
                 } as SubscribeParticipantJoined,
                 {
-                    type: 'ParticipantLeft' as SubscriptionType,
+                    type: 'Participant.Left' as SubscriptionType,
                     conferenceAlias: VoxeetSDK.conference.current.alias,
                 } as SubscribeParticipantLeft,
             ];
