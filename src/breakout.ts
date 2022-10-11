@@ -55,6 +55,8 @@ const createBreakout: CreateBreakout = (commands: CommandsType) => {
     };
 
     const onParticipantLeft = async (event: ParticipantLeftNotification) => {
+        if (event.participant.id === VoxeetSDK.session.participant.id) return;
+        
         // Remove the participant from any breakout room
         await moveTo(null, [event.participant]);
     };
