@@ -217,11 +217,9 @@ const createBreakout: CreateBreakout = (commands: CommandsType) => {
         await commands.send(JSON.stringify(payload), [participant]);
     };
 
-    // Initialize this service
-    initialize();
-
     return {
         breakoutRooms,
+        initialize,
         createRoom,
         closeRoom,
         moveTo,
