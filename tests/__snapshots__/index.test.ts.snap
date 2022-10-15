@@ -6,13 +6,12 @@ exports[`index test suite index should match the snapshot 1`] = `
     "breakoutRooms": Map {},
     "closeRoom": [Function],
     "createRoom": [Function],
+    "initialize": [Function],
     "moveTo": [Function],
   },
   "commands": Commands {
-    "_events": {
-      "received": [Function],
-    },
-    "_eventsCount": 1,
+    "_events": {},
+    "_eventsCount": 0,
     "_maxListeners": undefined,
     "onCommandReceive": [Function],
     "send": [Function],

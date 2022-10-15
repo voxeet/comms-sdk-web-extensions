@@ -25,6 +25,11 @@ export type Breakout = {
     breakoutRooms: BreakoutRooms;
 
     /**
+     * Initializes the breakout room capability.
+     */
+    initialize: () => void;
+
+    /**
      * Creates a new breakout room.
      * @param room - Breakout room to create.
      * @returns the unique identifier for this newly created breakout room.

@@ -24,7 +24,7 @@ class Commands extends EventEmitter implements CommandsType {
 
     public send = async (message: string, participants: Participant[]): Promise<void> => {
         const payload: TargetedCommand = {
-            target: participants.map((p) => p.id),
+            target: participants.map((p) => p?.id),
             message: message,
         };
 
