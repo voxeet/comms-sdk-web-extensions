@@ -22,7 +22,7 @@ exports[`index test suite index should match the snapshot 1`] = `
     "switchToListener": [Function],
     "switchToUser": [Function],
   },
-  "spatialAudio": {
+  "privateZones": {
     "createPrivateZone": [Function],
     "deletePrivateZone": [Function],
     "privateZones": Map {},

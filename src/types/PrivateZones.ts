@@ -19,7 +19,7 @@ export type Zone = {
 
 export type Zones = Map<string, Zone>;
 
-export type SpatialAudio = {
+export type PrivateZones = {
     /**
      * Configures a spatial environment of an application, so the audio renderer understands which directions the application considers forward, up, and right and which units it uses for distance.
      *
@@ -84,4 +84,4 @@ export type SpatialAudio = {
     setSpatialPosition: (participant: Participant, position: NonNullable<SpatialPosition>) => Promise<void>;
 };
 
-export type CreateSpatialAudio = () => SpatialAudio;
+export type CreatePrivateZones = () => PrivateZones;

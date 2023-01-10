@@ -29,24 +29,24 @@ const zone = {
     },
 };
 // Create a new private zone with the rules set above in the zone object
-const zoneId = await VoxeetSDKExt.spatialAudio.createPrivateZone(zone);
+const zoneId = await VoxeetSDKExt.privateZones.createPrivateZone(zone);
 ```
 
-When using private zone, you MUST rely on the `setSpatialPosition` function from the `spatialAudio` object to move a participant at a different location.
+When using private zone, you MUST rely on the `setSpatialPosition` function from the `privateZones` object to move a participant at a different location.
 
 ```ts
 // Set a participant position in that private zone
 const position = { x: 22, y: 33, z: 44 };
-await VoxeetSDKExt.spatialAudio.setSpatialPosition(participant, position);
+await VoxeetSDKExt.privateZones.setSpatialPosition(participant, position);
 
 // Update the zone origin
 zone.origin = {
     x: 100, y: 50, z: 0
 };
-await VoxeetSDKExt.spatialAudio.updatePrivateZone(zoneId, zone);
+await VoxeetSDKExt.privateZones.updatePrivateZone(zoneId, zone);
 
 // Delete the zone
-await VoxeetSDKExt.spatialAudio.deletePrivateZone(zoneId);
+await VoxeetSDKExt.privateZones.deletePrivateZone(zoneId);
 ```
 
 ### Conference

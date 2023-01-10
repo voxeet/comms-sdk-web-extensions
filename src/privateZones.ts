@@ -3,9 +3,9 @@ import { SpatialPosition, SpatialScale } from '@voxeet/voxeet-web-sdk/types/mode
 import { Participant, ParticipantStatus } from '@voxeet/voxeet-web-sdk/types/models/Participant';
 import { v4 as uuidv4 } from 'uuid';
 
-import { Zone, Zones, CreateSpatialAudio } from './types/SpatialAudio';
+import { Zone, Zones, CreatePrivateZones } from './types/PrivateZones';
 
-const createSpatialAudio: CreateSpatialAudio = () => {
+const createPrivateZones: CreatePrivateZones = () => {
     let globalScale: SpatialScale;
     let globalForward: SpatialPosition;
     let globalUp: SpatialPosition;
@@ -159,4 +159,4 @@ const createSpatialAudio: CreateSpatialAudio = () => {
     return { setSpatialEnvironment, createPrivateZone, deletePrivateZone, privateZones, updatePrivateZone, setSpatialPosition };
 };
 
-export default createSpatialAudio;
+export default createPrivateZones;
