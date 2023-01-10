@@ -150,7 +150,9 @@ const createPrivateZones: CreatePrivateZones = () => {
             }
         }
 
-        VoxeetSDK.conference.setSpatialPosition(participant, position);
+        if (VoxeetSDK.conference.current.params.spatialAudioStyle !== 'shared' || participant.id === VoxeetSDK.session.participant.id) {
+            VoxeetSDK.conference.setSpatialPosition(participant, position);
+        }
         participantsPositions.set(participant.id, position);
 
         await computeStatus();

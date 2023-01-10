@@ -19,13 +19,19 @@ Using the Spatial Audio capability, you now have the possibility to create priva
 ```ts
 const zone = {
     origin: {
-        x: 0, y: 0, z: 0
+        x: 0,
+        y: 0,
+        z: 0,
     },
     dimension: {
-        x: 100, y: 100, z: 100
+        x: 100,
+        y: 100,
+        z: 100,
     },
     scale: {
-        x: 10, y: 10, z: 10,
+        x: 10,
+        y: 10,
+        z: 10,
     },
 };
 // Create a new private zone with the rules set above in the zone object
@@ -41,7 +47,9 @@ await VoxeetSDKExt.privateZones.setSpatialPosition(participant, position);
 
 // Update the zone origin
 zone.origin = {
-    x: 100, y: 50, z: 0
+    x: 100,
+    y: 50,
+    z: 0,
 };
 await VoxeetSDKExt.privateZones.updatePrivateZone(zoneId, zone);
 
@@ -62,7 +70,7 @@ await VoxeetSDKExt.conference.switchToListener();
 
 // Switch the current listener into a user
 await VoxeetSDKExt.conference.switchToUser({
-    constraints: { video: false, audio: true}
+    constraints: { video: false, audio: true },
 });
 ```
 
@@ -79,10 +87,10 @@ VoxeetSDKExt.commands.on('received', (participant, message) => {
 });
 
 // Send a message to a couple of participants
-await VoxeetSDKExt.commands.send('message', [ participantA, participantB ]);
+await VoxeetSDKExt.commands.send('message', [participantA, participantB]);
 
 // Send a message all the participants in the conference
-await VoxeetSDKExt.commands.send('message', [ ]);
+await VoxeetSDKExt.commands.send('message', []);
 ```
 
 ### Breakout Rooms
@@ -96,19 +104,15 @@ await VoxeetSDKExt.breakout.initialize();
 // Create a new room and move participants into it
 const room = {
     name: 'Video games',
-    participants: [
-        participantA,
-        participantB,
-        participantC,
-    ]
-}
+    participants: [participantA, participantB, participantC],
+};
 const roomId = await VoxeetSDKExt.breakout.createRoom(room);
 
 // Move a participant into that previously created room
-await VoxeetSDKExt.breakout.moveTo(roomId, [ participantD ]);
+await VoxeetSDKExt.breakout.moveTo(roomId, [participantD]);
 
 // You can also move a participant back into the main room
-await VoxeetSDKExt.breakout.moveTo(null, [ participantA ]);
+await VoxeetSDKExt.breakout.moveTo(null, [participantA]);
 
 // And closing a room will move all the participant into the main room
 await VoxeetSDKExt.breakout.closeRoom(roomId);
