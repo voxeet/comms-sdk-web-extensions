@@ -56,7 +56,7 @@ const createBreakout: CreateBreakout = (commands: CommandsType) => {
 
     const onParticipantLeft = async (event: ParticipantLeftNotification) => {
         if (event.participant.id === VoxeetSDK.session.participant.id) return;
-        
+
         // Remove the participant from any breakout room
         await moveTo(null, [event.participant]);
     };
@@ -84,7 +84,7 @@ const createBreakout: CreateBreakout = (commands: CommandsType) => {
         await sendRoomsUpdate();
     };
 
-    const moveTo = async (roomId: string | null, participants: Participant[]): Promise<void> => {
+    const moveTo = async (roomId: string, participants: Participant[]): Promise<void> => {
         if (roomId && !breakoutRooms.has(roomId)) {
             return Promise.reject(`The breakout room with the id ${roomId} does not exist.`);
         }
@@ -97,6 +97,16 @@ const createBreakout: CreateBreakout = (commands: CommandsType) => {
                 // Remove the participants from that room
                 breakoutRoom.participants = breakoutRoom.participants.filter((p) => participants.filter((pp) => pp.id === p.id).length <= 0);
             }
+        }
+
+        await computeRooms();
+        await sendRoomsUpdate();
+    };
+
+    const moveToMainRoom = async (participants: Participant[]): Promise<void> => {
+        for (const [_, breakoutRoom] of breakoutRooms) {
+            // Remove the participants from that room
+            breakoutRoom.participants = breakoutRoom.participants.filter((p) => participants.filter((pp) => pp.id === p.id).length <= 0);
         }
 
         await computeRooms();
@@ -223,6 +233,7 @@ const createBreakout: CreateBreakout = (commands: CommandsType) => {
         createRoom,
         closeRoom,
         moveTo,
+        moveToMainRoom,
     };
 };
 

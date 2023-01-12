@@ -19,7 +19,7 @@ export type Zone = {
 
 export type Zones = Map<string, Zone>;
 
-export type SpatialAudio = {
+export type PrivateZones = {
     /**
      * Configures a spatial environment of an application, so the audio renderer understands which directions the application considers forward, up, and right and which units it uses for distance.
      *
@@ -46,26 +46,26 @@ export type SpatialAudio = {
      * @param zone private zone to create.
      * @returns the unique identifier for this newly created private zone.
      */
-    createPrivateZone: (zone: Zone) => Promise<string>;
+    createZone: (zone: Zone) => Promise<string>;
 
     /**
      * Gets the list of private zones.
      * @returns a dictionary of private zones.
      */
-    privateZones: Zones;
+    zones: Zones;
 
     /**
      * Deletes a private zone.
      * @param id identifier of the private zone to delete.
      */
-    deletePrivateZone: (zoneId: string) => Promise<void>;
+    deleteZone: (zoneId: string) => Promise<void>;
 
     /**
      * Updates a private zone.
      * @param id identifier of the private zone to update.
      * @param zone new settings for the private zone.
      */
-    updatePrivateZone: (zoneId: string, zone: Zone) => Promise<void>;
+    updateZone: (zoneId: string, zone: Zone) => Promise<void>;
 
     /**
      * Sets a participant's position in space to enable the spatial audio experience during a Dolby Voice conference. This method is available only for participants who joined the conference with the [spatialAudio](https://docs.dolby.io/communications-apis/docs/js-client-sdk-model-joinoptions#spatialaudio) parameter enabled. Otherwise, SDK triggers [UnsupportedError](https://docs.dolby.io/communications-apis/docs/js-client-sdk-model-unsupportederror). Depending on the specified participant in the `participant` parameter, the setSpatialPosition method impacts the location from which audio is heard or from which audio is rendered:
@@ -84,4 +84,4 @@ export type SpatialAudio = {
     setSpatialPosition: (participant: Participant, position: NonNullable<SpatialPosition>) => Promise<void>;
 };
 
-export type CreateSpatialAudio = () => SpatialAudio;
+export type CreatePrivateZones = () => PrivateZones;

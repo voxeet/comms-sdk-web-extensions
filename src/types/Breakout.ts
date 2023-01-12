@@ -45,10 +45,15 @@ export type Breakout = {
     /**
      * Moves a list of participants into a breakout room.
      * @param roomId - Identifier of the breakout room to move the participants to.
-     *                 If this value is `null` then the participants will be moved to the main room.
      * @param participants - List of participants to move.
      */
-    moveTo: (roomId: string | null, participants: Participant[]) => Promise<void>;
+    moveTo: (roomId: string, participants: Participant[]) => Promise<void>;
+
+    /**
+     * Moves a list of participants into the main room.
+     * @param participants - List of participants to move.
+     */
+    moveToMainRoom: (participants: Participant[]) => Promise<void>;
 };
 
 export type CreateBreakout = (commands: CommandsType) => Breakout;

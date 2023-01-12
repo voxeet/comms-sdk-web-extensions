@@ -8,6 +8,7 @@ exports[`index test suite index should match the snapshot 1`] = `
     "createRoom": [Function],
     "initialize": [Function],
     "moveTo": [Function],
+    "moveToMainRoom": [Function],
   },
   "commands": Commands {
     "_events": {},
@@ -22,13 +23,13 @@ exports[`index test suite index should match the snapshot 1`] = `
     "switchToListener": [Function],
     "switchToUser": [Function],
   },
-  "spatialAudio": {
-    "createPrivateZone": [Function],
-    "deletePrivateZone": [Function],
-    "privateZones": Map {},
+  "privateZones": {
+    "createZone": [Function],
+    "deleteZone": [Function],
     "setSpatialEnvironment": [Function],
     "setSpatialPosition": [Function],
-    "updatePrivateZone": [Function],
+    "updateZone": [Function],
+    "zones": Map {},
   },
 }
 `;

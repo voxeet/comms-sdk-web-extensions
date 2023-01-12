@@ -1,9 +1,10 @@
 import './__mocks__/MediaStream.mock';
 import './__mocks__/navigator.mock';
-import createSpatialAudio from '../src/spatialAudio';
-import { SpatialAudio, Zone } from '../src/types/SpatialAudio';
+import createPrivateZones from '../src/privateZones';
+import { PrivateZones, Zone } from '../src/types/PrivateZones';
+import { SpatialEnvironment, SpatialPosition, SpatialScale } from '@voxeet/voxeet-web-sdk/types/models/SpatialAudio';
 
-var spatialEnvironment: any;
+let spatialEnvironment: SpatialEnvironment;
 
 const mockSetSpatialEnvironment = jest.fn((scale, forward, up, right) => {
     spatialEnvironment = {
@@ -20,61 +21,62 @@ jest.mock('@voxeet/voxeet-web-sdk', () => ({
     },
     get conference() {
         return {
-            setSpatialEnvironment: (scale, forward, up, right) => mockSetSpatialEnvironment(scale, forward, up, right),
+            setSpatialEnvironment: (scale: SpatialScale, forward: SpatialPosition, up: SpatialPosition, right: SpatialPosition) =>
+                mockSetSpatialEnvironment(scale, forward, up, right),
         };
     },
 }));
 
-describe('spatial audio test suite', () => {
-    let spatialAudio: SpatialAudio;
+describe('private zones test suite', () => {
+    let privateZones: PrivateZones;
     const zone: Zone = { origin: { x: 0, y: 0, z: 0 }, dimension: { x: 2, y: 2, z: 2 }, scale: { x: 1, y: 1, z: 1 } };
 
     beforeEach(() => {
-        spatialAudio = createSpatialAudio();
+        privateZones = createPrivateZones();
     });
 
     test('instance should match the snapshot', () => {
-        expect(spatialAudio).toMatchSnapshot();
+        expect(privateZones).toMatchSnapshot();
     });
 
     test('returned zones should included the one just created', async () => {
         // act
-        await spatialAudio.createPrivateZone(zone);
+        await privateZones.createZone(zone);
 
-        const zonesValues = Array.from(spatialAudio.privateZones.values());
+        const zonesValues = Array.from(privateZones.zones.values());
 
         expect(zonesValues[0]).toMatchSnapshot();
     });
 
     test('first private zone should be updated', async () => {
-        spatialAudio.createPrivateZone(zone);
+        privateZones.createZone(zone);
 
-        const zonesValues = Array.from(spatialAudio.privateZones.values());
+        const zonesValues = Array.from(privateZones.zones.values());
         expect(zonesValues[0]).toMatchSnapshot();
 
         // retrieve zone ids
-        const idsIterator = spatialAudio.privateZones.keys();
+        const idsIterator = privateZones.zones.keys();
         const updatedZone: Zone = { origin: { x: 1, y: 1, z: 1 }, dimension: { x: 2, y: 2, z: 2 }, scale: { x: 1, y: 1, z: 1 } };
 
         // act
-        await spatialAudio.updatePrivateZone(idsIterator.next().value, updatedZone);
+        await privateZones.updateZone(idsIterator.next().value, updatedZone);
 
         // assert (check if zone was updated)
-        const updatedZonesValues = Array.from(spatialAudio.privateZones.values());
+        const updatedZonesValues = Array.from(privateZones.zones.values());
         expect(updatedZonesValues[0]).toMatchSnapshot();
     });
 
     test('private zones should be empty after deleting the last item', async () => {
-        spatialAudio.createPrivateZone(zone);
+        privateZones.createZone(zone);
 
-        const zonesValues = Array.from(spatialAudio.privateZones.values());
+        const zonesValues = Array.from(privateZones.zones.values());
         expect(zonesValues[0]).toMatchSnapshot();
 
-        const idsIterator = spatialAudio.privateZones.keys();
+        const idsIterator = privateZones.zones.keys();
 
-        await spatialAudio.deletePrivateZone(idsIterator.next().value);
+        await privateZones.deleteZone(idsIterator.next().value);
 
-        const updatedZonesValues = Array.from(spatialAudio.privateZones.values());
+        const updatedZonesValues = Array.from(privateZones.zones.values());
         expect(updatedZonesValues).toMatchSnapshot(); // empty array
     });
 
@@ -84,7 +86,7 @@ describe('spatial audio test suite', () => {
         const wrongId = 'wrong-id';
 
         try {
-            await spatialAudio.updatePrivateZone(wrongId, {
+            await privateZones.updateZone(wrongId, {
                 dimension: { x: 100, y: 100, z: 100 },
                 origin: { x: 0, y: 0, z: 0 },
                 scale: { x: 1, y: 1, z: 1 },
@@ -98,14 +100,14 @@ describe('spatial audio test suite', () => {
         const wrongId = 'wrong-id';
 
         try {
-            await spatialAudio.deletePrivateZone(wrongId);
+            await privateZones.deleteZone(wrongId);
         } catch (e) {
             expect(e).toEqual(`The private zone with the id ${wrongId} does not exist.`);
         }
     });
 
     test('setSpatialEnvironment', () => {
-        spatialAudio.setSpatialEnvironment({ x: 10, y: 10, z: 10 }, { x: 0, y: 0, z: 0 }, { x: 1, y: 1, z: 1 }, { x: 1, y: 1, z: 1 });
+        privateZones.setSpatialEnvironment({ x: 10, y: 10, z: 10 }, { x: 0, y: 0, z: 0 }, { x: 1, y: 1, z: 1 }, { x: 1, y: 1, z: 1 });
         expect(spatialEnvironment).toMatchSnapshot();
     });
 });

@@ -1,7 +1,7 @@
 import { Breakout } from './Breakout';
 import { Conferencing } from './Conference';
 import { CommandsType } from './Commands';
-import { SpatialAudio } from './SpatialAudio';
+import { PrivateZones } from './PrivateZones';
 
 export type Extension = {
     /**
@@ -20,9 +20,9 @@ export type Extension = {
     commands: CommandsType;
 
     /**
-     * Retrieves the SpatialAudio instance that allows to manipulate the spatial audio scene.
+     * Retrieves the PrivateZones instance that allows to manipulate private zones.
      */
-    spatialAudio: SpatialAudio;
+    privateZones: PrivateZones;
 };
 
 export type CreateExtension = () => Extension;

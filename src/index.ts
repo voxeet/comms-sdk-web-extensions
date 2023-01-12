@@ -2,7 +2,7 @@ import { CreateExtension } from './types/SDKExtension';
 import createBreakout from './breakout';
 import createConferencing from './conference';
 import Commands from './commands';
-import createSpatialAudio from './spatialAudio';
+import createPrivateZones from './privateZones';
 
 const createSDKExtension: CreateExtension = () => {
     const commands = new Commands();
@@ -11,7 +11,7 @@ const createSDKExtension: CreateExtension = () => {
         breakout: createBreakout(commands),
         conference: createConferencing(),
         commands: commands,
-        spatialAudio: createSpatialAudio(),
+        privateZones: createPrivateZones(),
     };
 };
 
