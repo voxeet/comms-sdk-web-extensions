@@ -112,7 +112,7 @@ const roomId = await VoxeetSDKExt.breakout.createRoom(room);
 await VoxeetSDKExt.breakout.moveTo(roomId, [participantD]);
 
 // You can also move a participant back into the main room
-await VoxeetSDKExt.breakout.moveTo(null, [participantA]);
+await VoxeetSDKExt.breakout.moveToMainRoom([participantA]);
 
 // And closing a room will move all the participant into the main room
 await VoxeetSDKExt.breakout.closeRoom(roomId);

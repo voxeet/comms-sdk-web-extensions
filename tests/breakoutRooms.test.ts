@@ -71,16 +71,17 @@ describe('breakoutRooms test suite', () => {
         };
         const roomId = await breakout.createRoom(br);
 
+        // Create another room
+        const br2: BreakoutRoom = {
+            name: 'second',
+            participants: [],
+        };
+        await breakout.createRoom(br2);
+
         await breakout.moveTo(roomId, [<any>{ id: '000' }]);
 
-        expect(breakout.breakoutRooms.size).toEqual(1);
+        expect(breakout.breakoutRooms.size).toEqual(2);
         expect(breakout.breakoutRooms.get(roomId)?.participants.length).toEqual(1);
-
-        // Move to the main room
-        await breakout.moveTo(null, [<any>{ id: '000' }]);
-
-        expect(breakout.breakoutRooms.size).toEqual(1);
-        expect(breakout.breakoutRooms.get(roomId)?.participants.length).toEqual(0);
     });
 
     test('Exceptions - moveTo', async () => {
@@ -91,6 +92,23 @@ describe('breakoutRooms test suite', () => {
         } catch (e) {
             expect(e).toEqual(`The breakout room with the id ${wrongId} does not exist.`);
         }
+    });
+
+    test('breakoutRooms moveToMainRoom', async () => {
+        const br: BreakoutRoom = {
+            name: 'first',
+            participants: [<any>{ id: '000' }],
+        };
+        const roomId = await breakout.createRoom(br);
+
+        expect(breakout.breakoutRooms.size).toEqual(1);
+        expect(breakout.breakoutRooms.get(roomId)?.participants.length).toEqual(1);
+
+        // Move to the main room
+        await breakout.moveToMainRoom([<any>{ id: '000' }]);
+
+        expect(breakout.breakoutRooms.size).toEqual(1);
+        expect(breakout.breakoutRooms.get(roomId)?.participants.length).toEqual(0);
     });
 
     test('Exceptions - closeRoom', async () => {
