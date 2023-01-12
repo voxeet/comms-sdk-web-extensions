@@ -11,7 +11,7 @@ const createPrivateZones: CreatePrivateZones = () => {
     let globalUp: SpatialPosition;
     let globalRight: SpatialPosition;
 
-    let privateZones: Zones = new Map<string, Zone>();
+    let zones: Zones = new Map<string, Zone>();
     let participantsPositions: Map<string, NonNullable<SpatialPosition>> = new Map<string, NonNullable<SpatialPosition>>();
 
     const isInZone = (position: NonNullable<SpatialPosition>, zone: Zone): boolean => {
@@ -25,7 +25,7 @@ const createPrivateZones: CreatePrivateZones = () => {
     };
 
     const getZone = (position: NonNullable<SpatialPosition>): [string, Zone] | undefined => {
-        for (const [id, zone] of privateZones.entries()) {
+        for (const [id, zone] of zones.entries()) {
             if (isInZone(position, zone)) {
                 // Only return the first one
                 return [id, zone];
@@ -96,7 +96,7 @@ const createPrivateZones: CreatePrivateZones = () => {
         globalRight = right;
     };
 
-    const createPrivateZone = async (zone: Zone): Promise<string> => {
+    const createZone = async (zone: Zone): Promise<string> => {
         if (!zone.videoRestriction) {
             zone.videoRestriction = false;
         }
@@ -104,25 +104,25 @@ const createPrivateZones: CreatePrivateZones = () => {
         // Generate a unique identifier to retrieve the zone easily
         const uuid: string = uuidv4();
 
-        privateZones.set(uuid, zone);
+        zones.set(uuid, zone);
 
         await computeStatus();
 
         return uuid;
     };
 
-    const deletePrivateZone = async (id: string): Promise<void> => {
-        if (!privateZones.has(id)) {
+    const deleteZone = async (id: string): Promise<void> => {
+        if (!zones.has(id)) {
             return Promise.reject(`The private zone with the id ${id} does not exist.`);
         }
 
-        privateZones.delete(id);
+        zones.delete(id);
 
         await computeStatus();
     };
 
-    const updatePrivateZone = async (id: string, zone: Zone): Promise<void> => {
-        if (!privateZones.has(id)) {
+    const updateZone = async (id: string, zone: Zone): Promise<void> => {
+        if (!zones.has(id)) {
             return Promise.reject(`The private zone with the id ${id} does not exist.`);
         }
 
@@ -130,7 +130,7 @@ const createPrivateZones: CreatePrivateZones = () => {
             zone.videoRestriction = false;
         }
 
-        privateZones.set(id, zone);
+        zones.set(id, zone);
 
         await computeStatus();
     };
@@ -158,7 +158,7 @@ const createPrivateZones: CreatePrivateZones = () => {
         await computeStatus();
     };
 
-    return { setSpatialEnvironment, createPrivateZone, deletePrivateZone, privateZones, updatePrivateZone, setSpatialPosition };
+    return { setSpatialEnvironment, createZone, deleteZone, zones, updateZone, setSpatialPosition };
 };
 
 export default createPrivateZones;

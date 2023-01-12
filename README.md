@@ -35,7 +35,7 @@ const zone = {
     },
 };
 // Create a new private zone with the rules set above in the zone object
-const zoneId = await VoxeetSDKExt.privateZones.createPrivateZone(zone);
+const zoneId = await VoxeetSDKExt.privateZones.createZone(zone);
 ```
 
 When using private zone, you MUST rely on the `setSpatialPosition` function from the `privateZones` object to move a participant at a different location.
@@ -51,10 +51,10 @@ zone.origin = {
     y: 50,
     z: 0,
 };
-await VoxeetSDKExt.privateZones.updatePrivateZone(zoneId, zone);
+await VoxeetSDKExt.privateZones.updateZone(zoneId, zone);
 
 // Delete the zone
-await VoxeetSDKExt.privateZones.deletePrivateZone(zoneId);
+await VoxeetSDKExt.privateZones.deleteZone(zoneId);
 ```
 
 ### Conference
