@@ -1,12 +1,11 @@
-name: Build Package
+name: Publish Package
 
 on:
-    push:
-        branches:
-            - '**'
+    release:
+        types: [published]
 
 jobs:
-    build-package:
+    publish-package:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout 🛎️
@@ -21,12 +20,8 @@ jobs:
             - name: Test the package 🔧
               run: npm run test
             - name: Build the package 🔨
+              run: npm run build
+            - name: Deploy to npm 🚀
               run: |
-                  npm run build
-                  npm pack
-            - name: Upload artifact 🗄️
-              uses: actions/upload-artifact@v3
-              with:
-                  name: npm-package
-                  path: ./*.tgz
-                  retention-days: 7
+                  npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPMJS_AUTH_TOKEN }}
+                  npm publish
