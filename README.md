@@ -1,3 +1,8 @@
+[![Build Package](https://github.com/DolbyIO/comms-sdk-web-extensions/actions/workflows/build-package.yml/badge.svg)](https://github.com/DolbyIO/comms-sdk-web-extensions/actions/workflows/build-package.yml)
+[![Publish Package](https://github.com/DolbyIO/comms-sdk-web-extensions/actions/workflows/publish-package.yml/badge.svg)](https://github.com/DolbyIO/comms-sdk-web-extensions/actions/workflows/publish-package.yml)
+[![npm](https://img.shields.io/npm/v/@dolbyio/comms-sdk-web-extensions)](https://www.npmjs.com/package/@dolbyio/comms-sdk-web-extensions)
+[![License](https://img.shields.io/github/license/DolbyIO/comms-sdk-web-extensions)](LICENSE)
+
 # Dolby.io Communications APIs SDK for Web Extensions
 
 This project is a series of extensions for the Dolby.io Communications SDK for Web.
