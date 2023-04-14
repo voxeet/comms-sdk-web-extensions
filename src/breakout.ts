@@ -10,8 +10,11 @@ import { CommandsType, ActionCommand } from './types/Commands';
 const createBreakout: CreateBreakout = (commands: CommandsType) => {
     const COMMAND_UPDATE_NAME = 'BREAKOUT_ROOMS_UPDATE';
     const COMMAND_IGNORE_NAME = 'BREAKOUT_ROOMS_IGNORE';
+    const COMMAND_PA_START_NAME = 'BREAKOUT_ROOMS_PA_START';
+    const COMMAND_PA_STOP_NAME = 'BREAKOUT_ROOMS_PA_STOP';
 
     let breakoutRooms: BreakoutRooms = new Map<string, BreakoutRoom>();
+    let announcer: Participant | null = null;
 
     const initialize = () => {
         // Subscribe to the received event
@@ -113,6 +116,24 @@ const createBreakout: CreateBreakout = (commands: CommandsType) => {
         await sendRoomsUpdate();
     };
 
+    const startAnnouncement = async (): Promise<void> => {
+        const payload: ActionCommand = {
+            action: COMMAND_PA_START_NAME,
+            payload: JSON.stringify({}),
+        };
+
+        await commands.send(JSON.stringify(payload), []);
+    };
+
+    const stopAnnouncement = async (): Promise<void> => {
+        const payload: ActionCommand = {
+            action: COMMAND_PA_STOP_NAME,
+            payload: JSON.stringify({}),
+        };
+
+        await commands.send(JSON.stringify(payload), []);
+    };
+
     const getParticipantRoom = (participant: Participant): string => {
         for (const [id, breakoutRoom] of breakoutRooms) {
             if (breakoutRoom.participants.filter((p) => p.id === participant.id)) {
@@ -159,6 +180,11 @@ const createBreakout: CreateBreakout = (commands: CommandsType) => {
                 continue;
             }
 
+            if (announcer && id === announcer.id) {
+                // Ignore the announcer
+                continue;
+            }
+
             const pRoomId = getParticipantRoom(participant);
 
             if (myRoomId === pRoomId) {
@@ -195,6 +221,12 @@ const createBreakout: CreateBreakout = (commands: CommandsType) => {
             await computeRooms();
         } else if (payload.action === COMMAND_IGNORE_NAME) {
             await setInDifferentRoom(participant);
+        } else if (payload.action === COMMAND_PA_START_NAME) {
+            announcer = participant;
+            await setInSameRoom(participant);
+        } else if (payload.action === COMMAND_PA_STOP_NAME) {
+            announcer = null;
+            await computeRooms();
         }
     };
 
@@ -234,6 +266,8 @@ const createBreakout: CreateBreakout = (commands: CommandsType) => {
         closeRoom,
         moveTo,
         moveToMainRoom,
+        startAnnouncement,
+        stopAnnouncement,
     };
 };
 

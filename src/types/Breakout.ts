@@ -54,6 +54,16 @@ export type Breakout = {
      * @param participants - List of participants to move.
      */
     moveToMainRoom: (participants: Participant[]) => Promise<void>;
+
+    /**
+     * Starts an announcement to the entire conference.
+     */
+    startAnnouncement: () => Promise<void>;
+
+    /**
+     * Stops the announcement.
+     */
+    stopAnnouncement: () => Promise<void>;
 };
 
 export type CreateBreakout = (commands: CommandsType) => Breakout;
