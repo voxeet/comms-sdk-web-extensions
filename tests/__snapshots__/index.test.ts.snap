@@ -9,6 +9,8 @@ exports[`index test suite index should match the snapshot 1`] = `
     "initialize": [Function],
     "moveTo": [Function],
     "moveToMainRoom": [Function],
+    "startAnnouncement": [Function],
+    "stopAnnouncement": [Function],
   },
   "commands": Commands {
     "_events": {},
