@@ -1,3 +1,5 @@
+# :warning: This repository is no longer maintained :warning:
+
 [![Build Package](https://github.com/DolbyIO/comms-sdk-web-extensions/actions/workflows/build-package.yml/badge.svg)](https://github.com/DolbyIO/comms-sdk-web-extensions/actions/workflows/build-package.yml)
 [![Publish Package](https://github.com/DolbyIO/comms-sdk-web-extensions/actions/workflows/publish-package.yml/badge.svg)](https://github.com/DolbyIO/comms-sdk-web-extensions/actions/workflows/publish-package.yml)
 [![npm](https://img.shields.io/npm/v/@dolbyio/comms-sdk-web-extensions)](https://www.npmjs.com/package/@dolbyio/comms-sdk-web-extensions)
